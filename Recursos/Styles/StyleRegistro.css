@@ -118,3 +118,8 @@ footer p {
     line-height: 33px;
     text-align: center;
 }
+#responseMessage {
+    margin-top: 10px;
+    text-align: center;
+    color: #4CAF50;
+}
