@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro - PetCare</title>
+    <link rel="stylesheet" href="Recursos/Styles/stylelogin.css">
+</head>
+<body>
+    <header>
+        <img src="Recursos/images/LogoPetCareSinFondo.png" alt="Logo" class="logo-pet-care-sin-fondo-png-1">
+    </header>
+
+    <section class="login">
+        <h2>Iniciar Sesión en PetCare</h2>
+        <form>
+            <div class="input-group">
+                <label for="Documento">Número de Documento</label>
+                <input type="text" id="Documento" name="Documento" required>
+            </div>            
+
+            <div class="input-group">
+                <label for="password">Contraseña</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+
+            <button type="submit" class="btnlogin" aria-label="Registrarme">Iniciar Sesión</button>
+        </form>
+        <p id="error-message" style="color: red; display: none;"></p>
+
+        <a href="index.html" class="btncancelar">Cancelar</a>
+    </section>
+
+    <footer>
+        <p>2024 PetCare. Todos los derechos reservados</p>
+    </footer>
+
+    <script src="Recursos/Scripts/app.js"></script>
+</body>
+</html>
