@@ -1,0 +1,192 @@
+@import url('https://fonts.cdnfonts.com/css/glacial-indifference-2');
+
+* { 
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Glacial Indifference';
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+.header {
+    width: 100%;
+    height: 100px;
+    background-color: rgba(211, 211, 211, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    color: #333;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
+}
+
+.logo-header img {
+    width: 200px;
+}
+
+.settings {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.settings img {
+    width: 40px;
+    height: 40px;
+}
+
+.sidebar {
+    width: 350px;
+    background-color: rgba(211, 211, 211, 0.15);
+    color: #fff;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: fixed;
+    top: 100px;
+    bottom: 0;
+}
+
+.menu ul {
+    list-style: none;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.menu {
+    margin-bottom: 15px;
+}
+
+.menupadre, .submenu li a{
+    color: #000; /* Color de la letra negro */
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 20px;
+    background-color: rgba(211, 211, 211, 0.30);
+    border-radius: 5px; /* Bordes redondeados */
+    transition: background-color 0.3s, color 0.3s; /* Transición suave */
+    width: 100%; /* Para que el botón ocupe el ancho total de la barra lateral */
+    text-align: center; /* Centra el texto dentro del botón */
+    display: flex; /* Usa flexbox para alinear el texto y el ícono */
+    align-items: center; /* Centra verticalmente el texto */
+    height: 60px;
+    justify-content: center; /* Centra el contenido */
+}
+
+.menupadre:hover {
+    background-color: #388E3C; /* Cambia el fondo a verde cuando el cursor pasa por encima */
+    color: #fff; /* Cambia la letra a blanco */
+    text-decoration: none; /* Sin subrayado */
+}
+
+.menupadre.active .submenu {
+    display: block; /* Muestra el submenú cuando el elemento padre está activo */
+}
+
+.submenu {
+    list-style: none;
+    padding-left: 20px;
+    display: none; /* Mantiene los submenús ocultos */
+}
+
+.submenu li a:hover {
+    background-color: #388E3C; /* Cambia el fondo a verde al pasar el cursor */
+    color: #fff; /* Cambia la letra a blanco al pasar el cursor */
+}
+
+.submenu {
+    list-style: none;
+    padding-left: 20px;
+    display: none; /* Mantiene los submenús ocultos */
+}
+
+.submenu li {
+    margin: 10px 0;
+}
+
+.menu-icon {
+    width: 50px; /* Tamaño del ícono */
+    height: 50px;
+    margin-right: 15px;
+}
+
+.sidebar {
+    width: 350px; /* Aumenta el ancho de la barra lateral */
+    background-color: rgba(211, 211, 211, 0.15);
+    color: #fff;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: fixed;
+    top: 100px; /* Ajusta según el tamaño del header */
+    bottom: 0; /* Extiende hasta el fondo */
+    overflow-y: auto; /* Agrega desplazamiento vertical */
+}
+
+.content {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    padding: 40px;
+    margin-left: 350px; /* Aumenta el margen izquierdo para ajustar la posición */
+    margin-top: 100px;
+}
+
+footer {
+    text-align: center;
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 10px;
+    margin-left: 300px;
+}
+
+.carousel-inner img {
+    width: 100%; /* Asegura que las imágenes ocupen el 100% del ancho del carrusel */
+    height: 400px;
+    object-fit: cover; /* Esto asegura que las imágenes mantengan su proporción sin deformarse */
+}
+
+.logout-menu {
+    display: none; /* Mantener oculto por defecto */
+    position: absolute; /* Posicionar el menú en relación al header */
+    top: 100px;
+    right: 20px; /* Espaciado desde la derecha */
+    background-color: #fff; /* Color de fondo del menú */
+    border: 1px solid #ddd; /* Borde del menú */
+    border-radius: 5px; /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para profundidad */
+    z-index: 20; /* Asegura que esté encima de otros elementos */
+}
+
+.logout-menu.visible {
+    display: block; /* Mostrar el menú cuando tiene la clase 'visible' */
+}
+
+.logout-option {
+    padding: 10px 15px; /* Espaciado interno para la opción */
+    color: #333; /* Color del texto */
+    text-decoration: none; /* Sin subrayado */
+    display: block; /* Asegura que la opción ocupe toda la línea */
+}
+
+.logout-option:hover {
+    background-color: #388E3C; /* Cambia el fondo a verde al pasar el cursor */
+    color: #fff; /* Cambia la letra a blanco al pasar el cursor */
+    text-decoration: none; /* Sin subrayado */
+}
