@@ -1,0 +1,144 @@
+@import url('https://fonts.cdnfonts.com/css/glacial-indifference-2');
+
+header {
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+}
+
+.logo-pet-care {
+    width: 347px;
+    height: 104px;
+}
+
+.buttons {
+    display: flex;
+    gap: 20px;
+}
+
+.btn {
+    background-color: #388E3C;
+    border: 1px solid #8492A6;
+    border-radius: 60px;
+    width: 260px;
+    height: 76px;
+    color: #FFFFFF;
+    font-family: 'Glacial Indifference', sans-serif;
+    font-size: 30px;
+    text-align: center;
+    cursor: pointer;
+    text-decoration: none;
+    line-height: 76px;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.btn:hover {
+    background-color: #2e7d32;
+    transform: scale(1.05);
+}
+
+section {
+    background-color: rgba(211, 211, 211, 0.15);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+}
+
+.main-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
+    margin-right: 200px;
+}
+
+.image-content {
+    display: flex;
+    justify-content: center;
+    margin-left: 100px;
+}
+
+#txtinicio {
+    color: #388E3C;
+    font-family: 'Glacial Indifference', sans-serif;
+    font-size: 50px;
+    line-height: 65px;
+    width: 676px;    
+    align-items: center;
+    text-align: center;
+}
+
+#textparrafo {
+    color: #66BB6A;
+    font-family: 'Glacial Indifference', sans-serif;
+    font-size: 26px;
+    line-height: 33px;
+    width: 651px;    
+    align-items: center;
+    text-align: center;
+}
+
+.perroygato-3-jpg {
+    border-radius: 71px;
+    opacity: 0.74;
+    width: 674px;
+    height: 449px;
+}
+
+.features {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    max-width: 1200px;
+    margin-top: 50px;
+    gap: 50px;    
+    margin-right: 200px;
+    
+}
+
+.feature {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    width: 45%;
+    margin-bottom: 20px;
+    margin-left: 50px;
+}
+
+.icon {
+    width: 90px;
+    height: 90px;
+    flex-shrink: 0;
+}
+
+.feature-text {
+    color: #333333;
+    font-family: 'Glacial Indifference', sans-serif;
+    font-size: 26px;
+    line-height: 33px;
+    width: 100%;
+}
+
+footer {
+    background-color: white;
+    padding: 10px;
+    text-align: center;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    border: 1px solid #8c8c94;
+}
+
+footer p {
+    color: #47525E;
+    font-family: Glacial Indifference;
+    font-size: 26px;
+    line-height: 33px;
+    text-align: center;
+}

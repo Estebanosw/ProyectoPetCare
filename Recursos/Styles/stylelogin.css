@@ -1,0 +1,118 @@
+@import url('https://fonts.cdnfonts.com/css/glacial-indifference-2');
+
+html, body {
+    height: 100%;
+    font-family: 'Glacial Indifference', sans-serif;
+    background-color: rgba(211, 211, 211, 0.15);
+}
+
+header {
+    background-color: rgba(211, 211, 211, 0.15);
+    padding: 10px 20px;
+    text-align: center;
+}
+
+.logo-pet-care-sin-fondo-png-1 {
+    width: 500px;
+    height: 150px;
+    margin: 0 auto;
+}
+
+.login {
+    background-color: rgba(211, 211, 211, 0.15);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 80px;
+    
+}
+
+h2 {
+    color: #388E3C; /* Color del encabezado */
+    font-size: 2em; /* Tamaño del texto */
+    font-weight: bold; /* Pone el texto en negrilla */    
+    font-family: 'Glacial Indifference', sans-serif;
+}
+
+form {
+    display: flex; /* Usar flexbox */
+    flex-direction: column; /* Colocar los elementos uno debajo del otro */
+    align-items: center; /* Centrar horizontalmente todos los elementos */
+}
+
+.input-group {
+    display: grid; /* Establecer Grid para el contenedor */
+    gap: 10px; /* Espacio entre columnas */
+    margin-bottom: 15px; /* Espacio entre cada grupo */
+}
+
+label {
+    color: #388E3C; /* Color del texto */
+    font-family: 'Glacial Indifference', sans-serif;
+    font-size: 30px; /* Tamaño del texto */
+    line-height: 37px; /* Altura de línea para centrar verticalmente el texto */
+    font-weight: bold; /* Pone el texto en negrilla */
+    text-align: center;
+
+}
+
+input {
+    background-color: rgba(211, 211, 211, 0.15);
+    width: 426px;
+    height: 58px;
+    padding: 0 10px; /* Espaciado interno */
+    border: 1px solid #ccc; /* Borde del input */
+    border-radius: 4px; /* Esquinas redondeadas */
+    
+}
+
+.btnlogin{
+    background-color: #388E3C; /* Color de fondo del botón */
+    border: 1px solid #8492A6; /* Borde del botón */
+    border-radius: 60px; /* Bordes redondeados */
+    width: 260px; /* Ancho del botón */
+    height: 76px; /* Alto del botón */
+    display: flex; /* Usar flexbox para centrar el contenido */
+    justify-content: center; /* Centrar horizontalmente */
+    align-items: center; /* Centrar verticalmente */
+    margin: 20px auto; /* Centrar el botón en su contenedor */
+    color: #FFFFFF; /* Color del texto */
+    font-family: 'Glacial Indifference', sans-serif; /* Fuente del texto */
+    font-size: 30px; /* Tamaño de la fuente */
+    line-height: 39px; /* Altura de línea */
+    text-align: center; /* Alinear texto al centro */
+    transition: background-color 0.3s, transform 0.3s;
+
+}
+
+.btnlogin:hover {
+    background-color: #2e7d32;
+    transform: scale(1.05);
+}
+
+.btncancelar{
+    color: #969FAA;
+    font-family: Glacial Indifference;
+    font-size: 30px;
+    line-height: 39px;
+    text-align: center;
+}
+
+footer {
+    background-color: white;
+    padding: 10px;
+    text-align: center;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    border: 1px solid #8c8c94;
+}
+
+footer p {
+    color: #47525E;
+    font-family: Glacial Indifference;
+    font-size: 26px;
+    line-height: 33px;
+    text-align: center;
+}
