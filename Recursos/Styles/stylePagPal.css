@@ -156,10 +156,20 @@ footer {
     margin-left: 300px;
 }
 
-.carousel-inner img {
-    width: 100%; /* Asegura que las imágenes ocupen el 100% del ancho del carrusel */
-    height: 400px;
-    object-fit: cover; /* Esto asegura que las imágenes mantengan su proporción sin deformarse */
+.carousel-item img {
+    width: 100%; /* Se ajusta al ancho completo del contenedor */
+    height: auto; /* Mantiene la proporción de la imagen */
+    object-fit: cover; /* Asegura que la imagen ocupe todo el espacio del contenedor */
+}
+
+#myCarousel {
+    max-width: 1200px; /* Tamaño máximo en pantallas grandes */
+    width: 100%; /* Se adapta al tamaño de la pantalla */
+    margin: 0 auto; /* Centra el carrusel en la página */
+}
+
+.carousel-inner, .carousel-item {
+    height: 400px; /*altura*/
 }
 
 .logout-menu {
