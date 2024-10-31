@@ -1,8 +1,8 @@
 // auth.js
 
 // Verificar si el usuario está autenticado
-const usuarioId = localStorage.getItem('usuarioId');
-if (!usuarioId) {
+const usuarioId = localStorage.getItem('Documento'); // Asegúrate de que 'Documento' sea la clave correcta en el localStorage
+if (!usuarioId) { // Cambié Documento por usuarioId
     // Si no está autenticado, redirigir al login
     window.location.href = "/template/login.html";
 }

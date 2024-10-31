@@ -59,6 +59,70 @@ app.post('/api/login', (req, res) => {
     });
 });
 
+// consulta de tipomascota
+app.get('/api/obtenermascota', (req, res) => {
+    const query = "select id,descripciontipom from tipomascota;";
+    connection.query(query, (error, result) => {
+
+        if (error) {
+            res.status(500).json({
+                success: false,
+                message: "Error de recuperacion datos",
+                datails: error.message
+            });
+        } else {
+            res.status(200).json({
+                success: true,
+                message: "Datos de la tabla",
+                data: result
+            });
+            //res.json(result);
+        }
+    })
+});
+
+// consulta de raza
+app.get('/api/obtenerraza/:tipomascotaid', (req, res) => {
+    const { tipomascotaid } = req.params; // Obtener el ID de la mascota de los parámetros de la ruta
+    const query = "SELECT * FROM raza WHERE tipomascotaid = ?;";
+
+    connection.query(query, [tipomascotaid], (error, result) => {
+        if (error) {
+            res.status(500).json({
+                success: false,
+                message: "Error de recuperación de datos",
+                datails: error.message
+            });
+        } else {
+            res.status(200).json({
+                success: true,
+                message: "Datos de la tabla",
+                data: result
+            });
+        }
+    });
+});
+
+// Ruta POST para guardar el registro de mascota
+app.post('/api/guardar', (req, res) => {
+    const { tipomascotaid, nombre, razaid, fechanacimiento, UsuarioDocumento } = req.body;
+
+    // Consulta SQL para insertar una nueva mascota
+    const sql = 'INSERT INTO mascota (tipomascotaid, nombre, razaid, fechanacimiento, UsuarioDocumento) VALUES (?, ?, ?, ?, ?)';
+    connection.query(sql, [tipomascotaid, nombre, razaid, fechanacimiento, UsuarioDocumento], (error, result) => {
+        if (error) {
+            console.error('Error al insertar mascota:', error); // Registro del error en el servidor
+            return res.status(500).json({ success: false, message: 'Error al guardar la mascota', error: error.message });
+        }else if (!tipoMascota) {
+            return res.status(400).json({ success: false, message: 'El tipo de mascota es requerido' });
+        }
+        else {
+            res.status(201).json({ success: true, id: result.insertId, tipomascotaid, nombre, razaid, fechanacimiento, UsuarioDocumento });
+        }
+    });
+});
+
+
 // Puerto de Conexión del servidor
 const PORT = 3000;
 app.listen(PORT, () =>{
