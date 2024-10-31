@@ -27,11 +27,34 @@ app.post('/api/insertar', (req,res)=>{
     const query1 = 'INSERT INTO usuario (Documento, nombres, apellidos, correo, contrasenia) VALUES (?, ?, ?, ?, ?)';
     connection.query(query1, [Documento, nombres, apellidos, correo, contrasenia], (error, result) => {
         if (error) {
-            console.error("Error en la consulta:", error);
-            res.status(500).json({ error });
+            if (error.code === 'ER_DUP_ENTRY') { // Código de error para duplicado
+                return res.status(409).json({ error: "El documento ya existe en el sistema." });
+            } else {
+                console.error("Error en la consulta:", error);
+                return res.status(500).json({ error: "Error en la creación del registro." });
+            }
         } else {
-            // Cambia esto según cómo quieras devolver el ID
-            res.status(201).json({ Documento: result.insertId, Documento, nombres, apellidos, correo, contrasenia});
+            res.status(201).json({ Documento: result.insertId, Documento, nombres, apellidos, correo, contrasenia });
+        }
+    });
+});
+
+// Ruta de login
+app.post('/api/login', (req, res) => {
+    const { Documento, contrasenia } = req.body;
+
+    // Consulta SQL para verificar si el usuario existe y la contraseña es correcta
+    const query = 'SELECT * FROM usuario WHERE Documento = ? AND contrasenia = ?';
+    connection.query(query, [Documento, contrasenia], (error, results) => {
+        if (error) {
+            console.error("Error en la consulta:", error);
+            res.status(500).json({ message: "Error en el servidor" });
+        } else if (results.length > 0) {
+            // Si se encontró un usuario que coincide, el login es exitoso
+            res.status(200).json({ message: "Login exitoso. ¡Bienvenido a PetCare!" });
+        } else {
+            // Si no hay coincidencias, devuelve un error de autenticación
+            res.status(401).json({ message: "Documento o contraseña incorrecta" });
         }
     });
 });

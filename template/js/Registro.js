@@ -29,7 +29,12 @@ document.addEventListener("DOMContentLoaded", () => {
         })
         .then(response => {
             if (!response.ok) {
-                throw new Error("Error en la creación del registro");
+                if (response.status === 409) {
+                    // Lanza un error con el mensaje específico para conflicto
+                    throw new Error("El documento ya está registrado. Por favor, utiliza otro.");                    
+                } else {
+                    throw new Error("Error en la creación del registro.");
+                }
             }
             return response.json();
         })
@@ -42,6 +47,8 @@ document.addEventListener("DOMContentLoaded", () => {
         .catch(error => {
             console.error("Error en el fetching:", error);
             alert("Hubo un error en el registro: " + error.message);
+            // Limpiar los campos del formulario
+            document.getElementById("registroForm").reset();
         });
     }
 });
