@@ -9,13 +9,14 @@ header {
 }
 
 .logo-pet-care {
-    width: 347px;
-    height: 104px;
+    width: 80%; /* Cambiar a porcentaje para que sea responsivo */
+    max-width: 347px; /* Tamaño máximo para pantallas grandes */
 }
 
 .buttons {
     display: flex;
-    gap: 20px;
+    gap: 10px; /* Reducir el espacio entre botones */
+    flex-wrap: wrap; /* Permitir que los botones se ajusten en pantallas pequeñas */
 }
 
 .btn {
@@ -23,14 +24,15 @@ header {
     border: 1px solid #8492A6;
     border-radius: 60px;
     width: 260px;
-    height: 76px;
+    max-width: 260px; /* Tamaño máximo para pantallas grandes */
+    height: 56px;
     color: #FFFFFF;
     font-family: 'Glacial Indifference', sans-serif;
-    font-size: 30px;
+    font-size: 20px;
     text-align: center;
     cursor: pointer;
     text-decoration: none;
-    line-height: 76px;
+    line-height: 56px;
     transition: background-color 0.3s, transform 0.3s;
 }
 
@@ -54,60 +56,60 @@ section {
     align-items: center;
     width: 100%;
     max-width: 1200px;
-    margin-right: 200px;
+    margin: 0 5%; /* Margen lateral */
 }
 
 .image-content {
     display: flex;
     justify-content: center;
-    margin-left: 100px;
+    margin: 0; /* Eliminar margen para hacer más responsivo */
 }
 
 #txtinicio {
     color: #388E3C;
     font-family: 'Glacial Indifference', sans-serif;
-    font-size: 50px;
-    line-height: 65px;
+    font-size: 2.5em; /* Cambiar a em para ser más responsivo */
+    line-height: 1.2; /* Ajustar el line-height */
+    width: 100%; /* Cambiar a 100% para que ocupe el ancho disponible */
     width: 676px;    
-    align-items: center;
     text-align: center;
 }
 
 #textparrafo {
     color: #66BB6A;
     font-family: 'Glacial Indifference', sans-serif;
-    font-size: 26px;
-    line-height: 33px;
-    width: 651px;    
-    align-items: center;
+    font-size: 1.2em; /* Cambiar a em para ser más responsivo */
+    line-height: 1.5; /* Ajustar el line-height */
+    width: 100%; /* Cambiar a 100% para que ocupe el ancho disponible */
+    max-width: 651px; /* Tamaño máximo */
     text-align: center;
 }
 
 .perroygato-3-jpg {
     border-radius: 71px;
     opacity: 0.74;
-    width: 674px;
-    height: 449px;
+    width: 100%; /* Cambiar a 100% para que ocupe el ancho disponible */
+    max-width: 674px; /* Tamaño máximo */
+    height: auto; /* Mantener la proporción de aspecto */
 }
 
 .features {
     display: flex;
+    flex-wrap: wrap; /* Permitir que los elementos se ajusten */
     justify-content: space-around;
     width: 100%;
     max-width: 1200px;
     margin-top: 50px;
-    gap: 50px;    
-    margin-right: 200px;
+    gap: 20px; /* Reducir el espacio entre características */
     
 }
 
 .feature {
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 10px;
     width: 45%;
     margin-bottom: 20px;
-    margin-left: 50px;
 }
 
 .icon {
@@ -119,8 +121,8 @@ section {
 .feature-text {
     color: #333333;
     font-family: 'Glacial Indifference', sans-serif;
-    font-size: 26px;
-    line-height: 33px;
+    font-size: 1.2em; /* Cambiar a em para ser más responsivo */
+    line-height: 1.5; /* Ajustar el line-height */
     width: 100%;
 }
 
@@ -128,17 +130,59 @@ footer {
     background-color: white;
     padding: 10px;
     text-align: center;
-    position: fixed;
-    left: 0;
-    bottom: 0;
+    position: relative;
     width: 100%;
     border: 1px solid #8c8c94;
 }
 
 footer p {
     color: #47525E;
-    font-family: Glacial Indifference;
-    font-size: 26px;
-    line-height: 33px;
-    text-align: center;
+    font-size: 1.2em; /* Cambiar a em para mayor adaptabilidad */
+    line-height: 1.5;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+    .main-content {
+        flex-direction: column; /* Cambiar la dirección para pantallas pequeñas */
+        align-items: center; /* Centrar contenido */
+    }
+    .buttons {
+        flex-direction: column; /* Cambiar a columna en pantallas pequeñas */
+        align-items: center; /* Centrar botones */
+    }
+
+    .btn {
+        width: 100%; /* Botones ocupan todo el ancho */
+        max-width: none; /* Eliminar tamaño máximo */
+    }
+    
+    #txtinicio {
+        font-size: 2em; /* Reducir tamaño de texto */
+    }
+
+    #textparrafo {
+        font-size: 1em; /* Reducir tamaño de texto */
+    }
+
+    .feature {
+        width: 100%; /* Hacer que las características ocupen todo el ancho */
+        margin-left: 0; /* Eliminar margen a la izquierda */
+    }
+
+    .icon {
+        width: 70px; /* Reducir iconos */
+        height: 70px; /* Reducir iconos */
+    }
+}
+
+@media (max-width: 480px) {
+    .btn {
+        font-size: 18px; /* Ajustar tamaño de fuente para botones */
+        height: 50px; /* Reducir altura de botones */
+    }
+    
+    header {
+        flex-direction: column; /* Cambiar a columna en pantallas muy pequeñas */
+    }
 }
