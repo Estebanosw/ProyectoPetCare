@@ -1,8 +1,16 @@
+const path = require('path');   // Para ejecutar desde index.html
 const express = require('express');
 const connection = require('./db');
+const { error } = require('console');
+const cors = require("cors");
+
 
 const app = express();
 app.use(express.json()); // Esto debe estar aquí antes de tus rutas
+
+// Servir el archivo index.html
+app.use(express.static(path.join(__dirname, 'template')));
+app.use(cors());
 
 // Ruta Prueba
 app.get('/api/PetCare', (req,res)=>{
