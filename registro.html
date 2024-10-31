@@ -13,7 +13,7 @@
 
     <section class="registration">
         <h2>Registrarse en PetCare</h2>
-        <form>
+        <form id="registroForm">
             <div class="input-group">
                 <label for="Documento">Número de Documento</label>
                 <input type="text" id="Documento" name="Documento" required>
@@ -41,7 +41,7 @@
 
             <button type="submit" class="btnregistrar" aria-label="Registrarme">Registrarme</button>
         </form>
-        <p id="error-message" style="color: red; display: none;"></p>
+        <div id="responseMessage"></div>
 
         <a href="index.html" class="btncancelar">Cancelar</a>
     </section>
