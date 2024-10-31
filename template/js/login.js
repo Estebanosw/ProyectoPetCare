@@ -26,6 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
         })
         .then(data => {
             alert(data.message);
+            localStorage.setItem('usuarioId', Documento); // Guarda el ID en localStorage
             window.location.href = "/template/paginaprincipal.html"; // Redirige a la página de inicio o de bienvenida
         })
         .catch(error => {
