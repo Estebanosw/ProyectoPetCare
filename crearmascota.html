@@ -15,19 +15,19 @@
             <img src="/Recursos/images/Configuracion.png" alt="Configuracion">
         </button>
         <div class="logout-menu" id="logoutMenu">
-            <a href="#" class="logout-option">Cerrar sesión</a>
+            <a href="/index.html" class="logout-option">Cerrar sesión</a>
         </div>
     </header>
     <div class="sidebar">
         <nav class="menus">
             <ul>
                 <li class="menu">
-                    <a href="#" class="menupadre">
+                    <a href="" class="menupadre">
                         <img src="/Recursos/images/GestionMascota.png" alt="Gestión de Mascotas" class="menu-icon">
                         GESTIÓN DE MASCOTAS
                     </a>
                     <ul class="submenu">
-                        <li><a href="#">
+                        <li><a href="/crearmascota.html">
                                 <img src="/Recursos/images/AñadirMascota.png" alt="Crear Mascota" class="menu-icon">
                                 CREAR MASCOTA
                             </a></li>
@@ -64,9 +64,33 @@
             </ul>
         </nav>
     </div>
-    <div class="content">
-        
-    </div>
+    <section class="content">
+        <h1>CREAR MASCOTA</h1>
+        <form>
+            <div class="input-group">
+                <label for="tipoMascota">Tipo de Mascota</label>
+                <select id="tipoMascota" name="tipoMascota" required></select>
+            </div>            
+
+            <div class="input-group">
+                <label for="nombreMascota">Nombre Mascota</label>
+                <input type="text" id="nombreMascota" name="nombreMascota" required>
+            </div>  
+
+            <div class="input-group">
+                <label for="raza">Raza</label>
+                <select id="raza" name="raza" required></select>
+            </div>
+
+            <div class="input-group">
+                <label for="fechaNacimiento">Fecha de Nacimiento</label>
+                <input type="date" id="fechaNacimiento" name="fechaNacimiento" required>
+            </div>
+
+            <button type="submit" class="btncrearMascota" aria-label="CrearMascota">Crear Mascota</button>
+        </form>
+        <p id="error-message" style="color: red; display: none;"></p>
+    </section>
     <footer>
         <p>2024 PetCare. Todos los derechos reservados</p>
     </footer>
