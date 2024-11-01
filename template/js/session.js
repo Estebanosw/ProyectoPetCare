@@ -1,8 +1,8 @@
 // auth.js
 
 // Verificar si el usuario está autenticado
-const usuarioId = localStorage.getItem('Documento'); // Asegúrate de que 'Documento' sea la clave correcta en el localStorage
-if (!usuarioId) { // Cambié Documento por usuarioId
+const usuarioId = localStorage.getItem('usuarioDocumento'); // Debe coincidir con el nombre que utilizas para guardar el documento
+if (!usuarioId) {
     // Si no está autenticado, redirigir al login
     window.location.href = "/template/login.html";
 }
@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const logoutButton = document.getElementById("logoutButton");
     if (logoutButton) {
         logoutButton.addEventListener("click", () => {
-            localStorage.removeItem('usuarioId'); // Elimina el ID del localStorage
+            localStorage.removeItem('usuarioDocumento'); // Elimina el ID del localStorage
             window.location.href = "/template/login.html"; // Redirige al login
         });
     }
