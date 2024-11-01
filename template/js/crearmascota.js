@@ -71,7 +71,7 @@ async function cargarRazas() {
 // Agregar el evento de cambio para cargar razas
 document.getElementById('tipoMascota').addEventListener('change', cargarRazas);
 
-// Crear Macota
+// Crear Mascota
 async function crearMascota(event) {
     event.preventDefault();
 
@@ -97,7 +97,7 @@ async function crearMascota(event) {
         data.tipomascotaid = data.tipoMascota;
         delete data.tipoMascota;
     } else {
-        console.error('El tipo de mascota no puede estar vacío.');
+        alert('El tipo de mascota no puede estar vacío.'); // Alert en lugar de console.error
         return;
     }
 
@@ -106,7 +106,7 @@ async function crearMascota(event) {
         data.nombre = data.nombreMascota;
         delete data.nombreMascota;
     } else {
-        console.error('El nombre de la mascota no puede estar vacío.');
+        alert('El nombre de la mascota no puede estar vacío.'); // Alert en lugar de console.error
         return;
     }
 
@@ -115,7 +115,7 @@ async function crearMascota(event) {
         data.razaid = data.raza;
         delete data.raza;
     } else {
-        console.error('La raza de la mascota no puede estar vacía.');
+        alert('La raza de la mascota no puede estar vacía.'); // Alert en lugar de console.error
         return;
     }
 
@@ -124,7 +124,7 @@ async function crearMascota(event) {
         data.fechanacimiento = data.fechaNacimiento;
         delete data.fechaNacimiento;
     } else {
-        console.error('La fecha de nacimiento de la mascota no puede estar vacía.');
+        alert('La fecha de nacimiento de la mascota no puede estar vacía.'); // Alert en lugar de console.error
         return;
     }
 
@@ -143,12 +143,14 @@ async function crearMascota(event) {
         console.log(result);
 
         if (result.success) {
-            console.log('Mascota creada:', result.message);
+            alert('Mascota creada: ' + result.message); // Alert en caso de éxito
+            // Opcional: Resetear el formulario si es necesario
+            event.target.reset(); // Resetea el formulario después de crear la mascota
         } else {
-            console.error('Error al crear mascota:', result.message);
+            alert('Error al crear mascota: ' + result.message); // Alert en caso de error
         }
     } catch (error) {
-        console.error('Error de conexión:', error);
+        alert('Error de conexión: ' + error); // Alert si hay un error de conexión
     }
 }
 

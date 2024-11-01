@@ -107,17 +107,24 @@ app.get('/api/obtenerraza/:tipomascotaid', (req, res) => {
 app.post('/api/guardar', (req, res) => {
     const { tipomascotaid, nombre, razaid, fechanacimiento, UsuarioDocumento } = req.body;
 
+    // Validar que los campos requeridos no estén vacíos
+    if (!tipomascotaid || !nombre || !razaid || !fechanacimiento || !UsuarioDocumento) {
+        return res.status(400).json({ success: false, message: 'Todos los campos son requeridos.' });
+    }
+
     // Consulta SQL para insertar una nueva mascota
     const sql = 'INSERT INTO mascota (tipomascotaid, nombre, razaid, fechanacimiento, UsuarioDocumento) VALUES (?, ?, ?, ?, ?)';
     connection.query(sql, [tipomascotaid, nombre, razaid, fechanacimiento, UsuarioDocumento], (error, result) => {
         if (error) {
             console.error('Error al insertar mascota:', error); // Registro del error en el servidor
             return res.status(500).json({ success: false, message: 'Error al guardar la mascota', error: error.message });
-        }else if (!tipoMascota) {
-            return res.status(400).json({ success: false, message: 'El tipo de mascota es requerido' });
-        }
-        else {
-            res.status(201).json({ success: true, id: result.insertId, tipomascotaid, nombre, razaid, fechanacimiento, UsuarioDocumento });
+        } else {
+            // Responder con éxito y un mensaje claro
+            res.status(201).json({ 
+                success: true, 
+                id: result.insertId, 
+                message: 'Mascota creada correctamente' // Mensaje de éxito
+            });
         }
     });
 });
