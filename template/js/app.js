@@ -129,6 +129,38 @@ app.post('/api/guardar', (req, res) => {
     });
 });
 
+// Consultar los registros de la Tablamascota
+app.get('/api/consultarmascota/:UsuarioDocumento/:tipoMascota/:nombreMascota', (req, res) => {
+    const query = `
+        SELECT m.id, tp.descripciontipom, m.nombre, r.descripcionraza, m.fechanacimiento 
+        FROM mascota AS m 
+        INNER JOIN tipomascota AS tp ON m.tipomascotaid = tp.id 
+        INNER JOIN raza AS r ON r.id = m.razaid 
+        WHERE m.UsuarioDocumento = ? 
+          AND tp.descripciontipom = ? 
+          AND m.nombre LIKE ?;
+    `;
+
+    const usuarioDocumento = req.params.UsuarioDocumento;
+    const tipoMascota = req.params.tipoMascota;
+    const nombreMascota = `%${req.params.nombreMascota}%`;
+
+    connection.query(query, [usuarioDocumento, tipoMascota, nombreMascota], (error, result) => {
+        if (error) {
+            res.status(500).json({
+                success: false,
+                message: "Error de recuperación de datos",
+                details: error.message
+            });
+        } else {
+            res.status(200).json({
+                success: true,
+                message: "Datos de la tabla",
+                data: result
+            });
+        }
+    });
+});
 
 // Puerto de Conexión del servidor
 const PORT = 3000;

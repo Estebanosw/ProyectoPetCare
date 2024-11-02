@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ver mis mascotas</title>
+    <link rel="stylesheet" href="/template/Recursos/Styles/styleconsultaMasc.css">
+</head>
+<body>
+    <header class="header">
+        <div class="logo-header">
+            <img src="/template/Recursos/images/LogoPetCareSinFondo.png" alt="PetCareLogo">
+        </div>
+        <button class="settings" id="settingsButton">
+            <img src="/template/Recursos/images/Configuracion.png" alt="Configuracion">
+        </button>
+        <div class="logout-menu" id="logoutMenu">
+            <a href="/template/index.html" class="logout-option">Cerrar sesión</a>
+        </div>
+    </header>
+    <div class="sidebar">
+        <nav class="menus">
+            <ul>
+                <li class="menu">
+                    <a href="" class="menupadre">
+                        <img src="/template/Recursos/images/GestionMascota.png" alt="Gestión de Mascotas" class="menu-icon">
+                        GESTIÓN DE MASCOTAS
+                    </a>
+                    <ul class="submenu">
+                        <li><a href="/template/crearmascota.html">
+                                <img src="/template/Recursos/images/AñadirMascota.png" alt="Crear Mascota" class="menu-icon">
+                                CREAR MASCOTA
+                            </a></li>
+                        <li><a href="#">
+                                <img src="/template/Recursos/images/EditarMascota.png" alt="Editar Mascota" class="menu-icon">
+                                EDITAR MASCOTA
+                            </a></li>
+                        <li><a href="/template/consultamascota.html">
+                                <img src="/template/Recursos/images/VerMascotas.png" alt="Ver Mis Mascotas" class="menu-icon">
+                                VER MIS MASCOTAS
+                            </a></li>
+                    </ul>
+                </li>
+                <li class="menu">
+                    <a href="#" class="menupadre">
+                        <img src="/template/Recursos/images/HistorialMed.png" alt="Historial Médico" class="menu-icon">
+                        HISTORIAL MEDICO
+                    </a>
+                    <ul class="submenu">
+                        <li><a href="#">
+                                <img src="/template/Recursos/images/Vacunas.png" alt="Vacunas" class="menu-icon">
+                                VACUNAS
+                            </a></li>
+                        <li><a href="#">
+                                <img src="/template/Recursos/images/Medicamentos.png" alt="Medicamentos" class="menu-icon">
+                                MEDICAMENTOS
+                            </a></li>
+                        <li><a href="#">
+                                <img src="/template/Recursos/images/Desparacitar.png" alt="Desparasitaciones" class="menu-icon">
+                                DESPARASITACIONES
+                            </a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <section class="content">
+        <h1>VER MIS MASCOTAS</h1>
+        <form id="formCrearMascota">
+            <div class="input-group">
+                <label for="tipoMascota">Tipo de Mascota</label>
+                <select id="tipoMascota" name="tipoMascota" required></select>
+            </div>            
+
+            <div class="input-group">
+                <label for="nombreMascota">Nombre Mascota</label>
+                <input type="text" id="nombreMascota" name="nombreMascota" placeholder="Ingrese el nombre" required>
+            </div>  
+
+            <button type="submit" id="consultarBtn" class="btnconsultaMasc" aria-label="CrearMascota">Consultar Mascota</button>
+        </form>
+            <table id="personaTable">
+                <thead>
+                    <tr>
+                        <th>Tipo de mascota</th>
+                        <th>Nombre Mascota</th>
+                        <th>Raza</th>
+                        <th>Fecha de Nacimiento</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+    </section>
+
+    <footer>
+        <p>2024 PetCare. Todos los derechos reservados</p>
+    </footer>
+    <script src="/template/js/crearmasc.js"></script>
+    <script src="/template/js/session.js"></script>
+    <script type="module" src="/template/js/init.js"></script>
+</body>
+</html>
