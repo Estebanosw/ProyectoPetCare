@@ -3,10 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pagina Principal</title>
-    <link rel="stylesheet" href="/template/Recursos/Styles/stylePagPal.css">
-    <!--Traemos la hoja de estilos de bootstrap para el carrusel-->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> 
+    <title>Crear Mascota</title>
+    <link rel="stylesheet" href="/template/Recursos/Styles/styleEditarMasc.css">
 </head>
 <body>
     <header class="header">
@@ -17,14 +15,14 @@
             <img src="/template/Recursos/images/Configuracion.png" alt="Configuracion">
         </button>
         <div class="logout-menu" id="logoutMenu">
-            <a href="/template/index.html" id="logoutButton" class="logout-option">Cerrar sesión</a>
+            <a href="/template/index.html" class="logout-option">Cerrar sesión</a>
         </div>
     </header>
     <div class="sidebar">
         <nav class="menus">
             <ul>
                 <li class="menu">
-                    <a href="#" class="menupadre">
+                    <a href="" class="menupadre">
                         <img src="/template/Recursos/images/GestionMascota.png" alt="Gestión de Mascotas" class="menu-icon">
                         GESTIÓN DE MASCOTAS
                     </a>
@@ -33,11 +31,11 @@
                                 <img src="/template/Recursos/images/AñadirMascota.png" alt="Crear Mascota" class="menu-icon">
                                 CREAR MASCOTA
                             </a></li>
-                        <li><a href="#">
+                        <li><a href="/template/editarmascota.html">
                                 <img src="/template/Recursos/images/EditarMascota.png" alt="Editar Mascota" class="menu-icon">
                                 EDITAR MASCOTA
                             </a></li>
-                        <li><a href="/template/consultamascota.html">
+                        <li><a href="#">
                                 <img src="/template/Recursos/images/VerMascotas.png" alt="Ver Mis Mascotas" class="menu-icon">
                                 VER MIS MASCOTAS
                             </a></li>
@@ -66,35 +64,51 @@
             </ul>
         </nav>
     </div>
-    <div class="content">
-        <div id="myCarousel" class="carousel slide" data-ride="carousel">
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img src="/template/Recursos/images/PerroyGato.jpg" alt="Imagen 1">
-                </div>
-                <div class="carousel-item">
-                    <img src="/template/Recursos/images/perroygato3.jpg" alt="Imagen 2">
-                </div>
-                <!-- Agrega más elementos según sea necesario -->
-            </div>
-            <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="sr-only">Anterior</span>
-            </a>
-            <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="sr-only">Siguiente</span>
-            </a>
-        </div>
-    </div>
+    <section class="content">
+        <h1>EDITAR MASCOTA</h1>
+        <form id="formEditarMascota">
+            <div class="input-group">
+                <label for="tipoMascota">Tipo de Mascota</label>
+                <select id="tipoMascota" name="tipoMascota" required></select>
+            </div>            
+
+            <div class="input-group">
+                <label for="nombreMascota">Nombre Mascota</label>
+                <input type="text" id="nombreMascota" name="nombreMascota" required>
+            </div>  
+
+            <button type="submit" class="btneditarMascota" aria-label="EditarMascota">Editar Mascota</button>
+        </form>
+        <p id="error-message" style="color: red; display: none;"></p>
+        <table>
+            <thead>
+              <tr>
+                <th>Acciones</th>
+                <th>Tipo de Mascota</th>
+                <th>Nombre Mascota</th>
+                <th>Raza</th>
+                <th>Fecha de Nacimiento</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                    <img src="/template/Recursos/images/editar.png" alt="Editar" class="edit-icon" onclick="">
+                    <img src="/template/Recursos/images/Guardar.png" alt="Guardar" class="save-icon" onclick="">
+                </td>
+                <td>Perros</td>
+                <td>Lassie</td>
+                <td>Beagle</td>
+                <td>30-09-2013</td>
+              </tr>
+            </tbody>
+          </table>          
+    </section>
     <footer>
         <p>2024 PetCare. Todos los derechos reservados</p>
     </footer>
     <script src="/template/js/menus.js"></script>
     <script src="/template/js/session.js"></script>
-    <!--Scripts de Bootstrap para el carrusel-->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script><!--Para interactuar con el DOM-->
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script><!--Para el desplazamiento automatico del carrusel-->
+    <script src="/template/js/editarmascota.js"></script>
 </body>
 </html>
