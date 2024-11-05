@@ -167,7 +167,7 @@ app.get('/api/consultarmascota/:UsuarioDocumento/:tipoMascota/:nombreMascota', (
         INNER JOIN tipomascota AS tp ON m.tipomascotaid = tp.id 
         INNER JOIN raza AS r ON r.id = m.razaid 
         WHERE m.UsuarioDocumento = ? 
-          AND tp.descripciontipom = ? 
+          AND tp.id = ? 
           AND m.nombre LIKE ?;
     `;
 
@@ -177,18 +177,27 @@ app.get('/api/consultarmascota/:UsuarioDocumento/:tipoMascota/:nombreMascota', (
 
     connection.query(query, [usuarioDocumento, tipoMascota, nombreMascota], (error, result) => {
         if (error) {
-            res.status(500).json({
+            return res.status(500).json({
                 success: false,
                 message: "Error de recuperación de datos",
                 details: error.message
             });
-        } else {
-            res.status(200).json({
-                success: true,
-                message: "Datos de la tabla",
-                data: result
+        }
+
+        if (result.length === 0) {
+            // Si no hay resultados, retornar un status 404
+            return res.status(404).json({
+                success: false,
+                message: "No se encontraron registros con los criterios especificados"
             });
         }
+
+        // Si hay resultados, retornar un status 200 con los datos
+        res.status(200).json({
+            success: true,
+            message: "Datos de la tabla",
+            data: result
+        });
     });
 });
 
