@@ -3,7 +3,7 @@ const express = require('express');
 const connection = require('./db');
 const { error } = require('console');
 const cors = require("cors");
-
+const bcrypt = require("bcrypt");
 
 const app = express();
 app.use(express.json()); // Esto debe estar aquí antes de tus rutas
@@ -21,21 +21,35 @@ app.get('/api/PetCare', (req,res)=>{
     });
 });
 
+//Número de rondas para generar el hash con bcrypt
+const saltRounds = 10;
+
 // crear registro
 app.post('/api/insertar', (req,res)=>{
     const { Documento, nombres, apellidos, correo, contrasenia } = req.body;
-    const query1 = 'INSERT INTO usuario (Documento, nombres, apellidos, correo, contrasenia) VALUES (?, ?, ?, ?, ?)';
-    connection.query(query1, [Documento, nombres, apellidos, correo, contrasenia], (error, result) => {
-        if (error) {
-            if (error.code === 'ER_DUP_ENTRY') { // Código de error para duplicado
-                return res.status(409).json({ error: "El documento ya existe en el sistema." });
-            } else {
-                console.error("Error en la consulta:", error);
-                return res.status(500).json({ error: "Error en la creación del registro." });
-            }
-        } else {
-            res.status(201).json({ Documento: result.insertId, Documento, nombres, apellidos, correo, contrasenia });
+    
+    //Agregando la encriptación con hash de la contraseña
+    bcrypt.hash(contrasenia, saltRounds, (err, hashedPassword) => {
+        if (err) {
+            return res.status(500).json({
+                success: false,
+                message: "Error al encriptar la contraseña",
+                details: err.message
+            });
         }
+        const query1 = 'INSERT INTO usuario (Documento, nombres, apellidos, correo, contrasenia) VALUES (?, ?, ?, ?, ?)';
+        connection.query(query1, [Documento, nombres, apellidos, correo, hashedPassword], (error, result) => {
+            if (error) {
+                if (error.code === 'ER_DUP_ENTRY') { // Código de error para duplicado
+                    return res.status(409).json({ error: "El documento ya existe en el sistema." });
+                } else {
+                    console.error("Error en la consulta:", error);
+                    return res.status(500).json({ error: "Error en la creación del registro." });
+                }
+            } else {
+                res.status(201).json({ Documento: result.insertId, Documento, nombres, apellidos, correo });
+            }
+        });
     });
 });
 
@@ -43,19 +57,35 @@ app.post('/api/insertar', (req,res)=>{
 app.post('/api/login', (req, res) => {
     const { Documento, contrasenia } = req.body;
 
-    // Consulta SQL para verificar si el usuario existe y la contraseña es correcta
-    const query = 'SELECT * FROM usuario WHERE Documento = ? AND contrasenia = ?';
-    connection.query(query, [Documento, contrasenia], (error, results) => {
+    // Consulta SQL para obtener el usuario por su documento
+    const query = 'SELECT * FROM usuario WHERE Documento = ?';
+    connection.query(query, [Documento], (error, results) => {
         if (error) {
             console.error("Error en la consulta:", error);
-            res.status(500).json({ message: "Error en el servidor" });
-        } else if (results.length > 0) {
-            // Si se encontró un usuario que coincide, el login es exitoso
-            res.status(200).json({ message: "Login exitoso. ¡Bienvenido a PetCare!" });
-        } else {
-            // Si no hay coincidencias, devuelve un error de autenticación
-            res.status(401).json({ message: "Documento o contraseña incorrecta" });
+            return res.status(500).json({ message: "Error en el servidor" });
         }
+
+        if (results.length === 0) {
+            // Si no se encontró ningún usuario con el documento proporcionado
+            return res.status(401).json({ message: "Documento o contraseña incorrecta" });
+        }
+
+        // Si el usuario existe, verificar la contraseña hasheada
+        const usuario = results[0]; //Si la consulta encontró al menos un resultado, toma el primer usuario en el arreglo results.
+        bcrypt.compare(contrasenia, usuario.contrasenia, (err, isMatch) => {
+            if (err) {
+                console.error("Error al comparar contraseñas:", err);
+                return res.status(500).json({ message: "Error en el servidor" });
+            }
+
+            if (isMatch) {
+                // Si la contraseña coincide
+                return res.status(200).json({ message: "Login exitoso. ¡Bienvenido a PetCare!" });
+            } else {
+                // Si la contraseña no coincide
+                return res.status(401).json({ message: "Documento o contraseña incorrecta" });
+            }
+        });
     });
 });
 
