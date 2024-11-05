@@ -17,7 +17,7 @@ export async function cargarTiposMascota() {
             // Llenar el select con los tipos de mascota
             data.data.forEach(tipo => {
                 const option = document.createElement('option');
-                option.value = tipo.id; // Asegúrate de que esta sea la clave correcta
+                option.value = tipo.id;
                 option.textContent = tipo.descripciontipom;
                 tipoMascotaSelect.appendChild(option);
             });

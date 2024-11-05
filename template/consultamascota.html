@@ -31,7 +31,7 @@
                                 <img src="/template/Recursos/images/AñadirMascota.png" alt="Crear Mascota" class="menu-icon">
                                 CREAR MASCOTA
                             </a></li>
-                        <li><a href="#">
+                        <li><a href="/template/editarmascota.html">
                                 <img src="/template/Recursos/images/EditarMascota.png" alt="Editar Mascota" class="menu-icon">
                                 EDITAR MASCOTA
                             </a></li>
@@ -66,7 +66,7 @@
     </div>
     <section class="content">
         <h1>VER MIS MASCOTAS</h1>
-        <form id="formCrearMascota">
+        <form id="formConsultarMascota">
             <div class="input-group">
                 <label for="tipoMascota">Tipo de Mascota</label>
                 <select id="tipoMascota" name="tipoMascota" required></select>
@@ -77,9 +77,10 @@
                 <input type="text" id="nombreMascota" name="nombreMascota" placeholder="Ingrese el nombre" required>
             </div>  
 
-            <button type="submit" id="consultarBtn" class="btnconsultaMasc" aria-label="CrearMascota">Consultar Mascota</button>
+            <button type="submit" id="consultarBtn" class="btnconsultaMasc" aria-label="ConsultarMascota">Consultar Mascota</button>
+            <p id="error-message" style="color: red;"></p>
         </form>
-            <table id="personaTable">
+            <table id="tablaConsMascota">
                 <thead>
                     <tr>
                         <th>Tipo de mascota</th>
@@ -97,6 +98,7 @@
     </footer>
     <script src="/template/js/menus.js"></script>
     <script src="/template/js/session.js"></script>
-    <script type="module" src="/template/js/init.js"></script>
+    <script type="module" src="/template/js/funcionesconsultmasc.js"></script>
+    <script src="/template/js/consultamasc.js"></script>
 </body>
 </html>
