@@ -188,7 +188,7 @@ app.get('/api/consultarmascota/:UsuarioDocumento/:tipoMascota/:nombreMascota', (
             // Si no hay resultados, retornar un status 404
             return res.status(404).json({
                 success: false,
-                message: "No se encontraron registros con los criterios especificados"
+                message: "No se encontraron mascotas asociadas a este usuario con el nombre y tipo especificados."
             });
         }
 
