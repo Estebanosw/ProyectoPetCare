@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ver mis mascotas</title>
-    <link rel="stylesheet" href="/template/Recursos/Styles/styleconsultaMasc.css">
+    <link rel="stylesheet" href="/template/Recursos/Styles/stylevacunas.css">
 </head>
 <body>
     <header class="header">
@@ -65,8 +65,8 @@
         </nav>
     </div>
     <section class="content">
-        <h1>VER MIS MASCOTAS</h1>
-        <form id="formConsultarMascota">
+        <h1>VACUNAS</h1>
+        <form id="formVacuna">
             <div class="input-group">
                 <label for="tipoMascota">Tipo de Mascota</label>
                 <select id="tipoMascota" name="tipoMascota" required></select>
@@ -76,17 +76,18 @@
                 <label for="nombreMascota">Nombre Mascota</label>
                 <input type="text" id="nombreMascota" name="nombreMascota" placeholder="Ingrese el nombre" required>
             </div>  
-
-            <button type="submit" id="consultarBtn" class="btnconsultaMasc" aria-label="ConsultarMascota">Consultar Mascota</button>
+            <div class="buttons">
+                <a href="/template/registrarvacuna.html" class="btnregistrovacuna" aria-label="Registrarse en PetCare">Registrar Nueva Vacuna</a>
+                <button type="submit" id="consultarBtn" class="btnvacuna" aria-label="Consulvacuna">Consultar Vacunas</button>
+            </div>
             <p id="error-message" style="color: red;"></p>
         </form>
-            <table id="tablaConsMascota">
+            <table id="tablavacuna">
                 <thead>
                     <tr>
-                        <th>Tipo de mascota</th>
-                        <th>Nombre Mascota</th>
-                        <th>Raza</th>
-                        <th>Fecha de Nacimiento</th>
+                        <th>Nombre Vacuna</th>
+                        <th>Fecha Aplicación</th>
+                        <th>Fecha Próximo Refuerzo</th>
                     </tr>
                 </thead>
                 <tbody></tbody>
@@ -98,7 +99,7 @@
     </footer>
     <script src="/template/js/menus.js"></script>
     <script src="/template/js/session.js"></script>
-    <script type="module" src="/template/js/funcionesconsultmasc.js"></script>
-    <script src="/template/js/consultamasc.js"></script>
+    <script type="module" src="/template/js/funcionconsultarvacuna.js"></script>
+    <script src="/template/js/consultarvacuna.js"></script>
 </body>
 </html>

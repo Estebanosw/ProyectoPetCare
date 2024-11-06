@@ -201,6 +201,98 @@ app.get('/api/consultarmascota/:UsuarioDocumento/:tipoMascota/:nombreMascota', (
     });
 });
 
+// consulta de mascota
+app.get('/api/obtenernombremascota/:UsuarioDocumento/:tipomascotaid', (req, res) => {
+    const { UsuarioDocumento } = req.params;
+    const { tipomascotaid } = req.params;
+    const query = "select id,nombre,tipomascotaid from mascota where UsuarioDocumento = ? and tipomascotaid = ?;";
+    connection.query(query, [UsuarioDocumento , tipomascotaid], (error, result) => {
+
+        if (error) {
+            res.status(500).json({
+                success: false,
+                message: "Error de recuperación de datos",
+                datails: error.message
+            });
+        } else {
+            res.status(200).json({
+                success: true,
+                message: "Datos de la tabla",
+                data: result
+            });
+        }
+    });
+});
+
+// Ruta POST para guardar el registro de vacuna
+app.post('/api/guardarvacuna', (req, res) => {
+    const { mascotaid, nombre, fechaaplicacion, fecproxrefuerzo } = req.body;
+
+    // Validar que los campos requeridos no estén vacíos
+    if (!mascotaid || !nombre || !fechaaplicacion || !fecproxrefuerzo) {
+        return res.status(400).json({ success: false, message: 'Todos los campos son requeridos.' });
+    }
+
+    // Consulta SQL para insertar una nueva mascota
+    const sql = 'INSERT INTO vacunas (mascotaid, nombre, fechaaplicacion, fecproxrefuerzo) VALUES (?, ?, ?, ?)';
+    connection.query(sql, [mascotaid, nombre, fechaaplicacion, fecproxrefuerzo], (error, result) => {
+        if (error) {
+            console.error('Error al insertar Vacuna:', error); // Registro del error en el servidor
+            return res.status(500).json({ success: false, message: 'Error al guardar la Vacuna', error: error.message });
+        } else {
+            // Responder con éxito y un mensaje claro
+            res.status(201).json({ 
+                success: true, 
+                id: result.insertId, 
+                message: 'Vacuna creada correctamente' // Mensaje de éxito
+            });
+        }
+    });
+});
+
+// consulta de vacuna
+app.get('/api/consultarvacuna/:UsuarioDocumento/:tipoMascota/:nombreMascota', (req, res) => {
+    const query = `
+        select v.nombre,v.fechaaplicacion,v.fecproxrefuerzo from vacunas as v
+        inner join mascota as m
+        on v.mascotaid=m.id
+        inner join tipomascota as tp
+        ON m.tipomascotaid = tp.id 
+        where m.UsuarioDocumento = ?
+        and tp.id = ?
+        and m.nombre like ?;
+    `;
+
+    const usuarioDocumento = req.params.UsuarioDocumento;
+    const tipoMascota = req.params.tipoMascota;
+    const nombreMascota = `%${req.params.nombreMascota}%`;
+
+    connection.query(query, [usuarioDocumento, tipoMascota, nombreMascota], (error, result) => {
+        if (error) {
+            return res.status(500).json({
+                success: false,
+                message: "Error de recuperación de datos",
+                details: error.message
+            });
+        }
+
+        if (result.length === 0) {
+            // Si no hay resultados, retornar un status 404
+            return res.status(404).json({
+                success: false,
+                message: "No se encontraron vacunas asociadas a esta mascota con el nombre y tipo especificados."
+            });
+        }
+
+        // Si hay resultados, retornar un status 200 con los datos
+        res.status(200).json({
+            success: true,
+            message: "Datos de la tabla",
+            data: result
+        });
+    });
+});
+
 // Puerto de Conexión del servidor
 const PORT = 3000;
 app.listen(PORT, () =>{
