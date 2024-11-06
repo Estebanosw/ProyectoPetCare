@@ -1,3 +1,4 @@
+//consultarmasc.js
 document.getElementById('formConsultarMascota').addEventListener('submit', async (event) => {
     event.preventDefault(); // Evitar el envío del formulario
 
@@ -16,6 +17,8 @@ document.getElementById('formConsultarMascota').addEventListener('submit', async
             // Si la respuesta no es 200 OK, trata de obtener el mensaje de error
             const errorData = await response.json();
             errorMessage.textContent = errorData.message || 'Error inesperado al consultar la mascota.'; // Mostrar el mensaje de error
+            const tbody = document.querySelector('#tablaConsMascota tbody');
+            tbody.innerHTML = '';
             return; // Salir de la función
         }
         const data = await response.json();

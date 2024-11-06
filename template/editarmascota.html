@@ -77,10 +77,10 @@
                 <input type="text" id="nombreMascota" name="nombreMascota" required>
             </div>  
 
-            <button type="submit" class="btneditarMascota" aria-label="EditarMascota">Editar Mascota</button>
+            <button type="submit" class="btneditarMascota" aria-label="EditarMascota">Consultar Mascota</button>
+            <p id="error-message" style="color: red;"></p>
         </form>
-        <p id="error-message" style="color: red; display: none;"></p>
-        <table>
+        <table id="tablaConsMascota">
             <thead>
               <tr>
                 <th>Acciones</th>
@@ -90,18 +90,7 @@
                 <th>Fecha de Nacimiento</th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
-                <td>
-                    <img src="/template/Recursos/images/editar.png" alt="Editar" class="edit-icon" onclick="">
-                    <img src="/template/Recursos/images/Guardar.png" alt="Guardar" class="save-icon" onclick="">
-                </td>
-                <td>Perros</td>
-                <td>Lassie</td>
-                <td>Beagle</td>
-                <td>30-09-2013</td>
-              </tr>
-            </tbody>
+            <tbody></tbody>
           </table>          
     </section>
     <footer>
@@ -109,6 +98,8 @@
     </footer>
     <script src="/template/js/menus.js"></script>
     <script src="/template/js/session.js"></script>
+    <script type="module" src="/template/js/funcionesconsultmasc.js"></script>
+    <script type="module" src="/template/js/funcioneseditarmasc.js"></script>
     <script src="/template/js/editarmascota.js"></script>
 </body>
 </html>
