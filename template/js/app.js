@@ -201,6 +201,37 @@ app.get('/api/consultarmascota/:UsuarioDocumento/:tipoMascota/:nombreMascota', (
     });
 });
 
+// Ruta PUT para actualizar una mascota en la base de datos
+app.put('/api/actualizarmascota/:idMascota', (req, res) => {
+    const { idMascota } = req.params;
+    const { tipomascotaid, nombremascota, razaid , fechanacimiento } = req.body;
+
+    // Validación para asegurarse de que al menos un campo se está pasando en el cuerpo de la solicitud
+    if (!tipomascotaid && !nombremascota && !razaid && !fechanacimiento) {
+        return res.status(400).json({ error: "Se debe proporcionar al menos un campo para actualizar la mascota." });
+    }
+
+    const query = `
+        UPDATE mascota
+        SET
+            tipomascotaid = COALESCE(?, tipomascotaid),
+            nombre = COALESCE(?, nombre),
+            razaid = COALESCE(?, razaid),
+            fechanacimiento = COALESCE(?, fechanacimiento)
+        WHERE id = ?
+        `;
+
+    connection.query(query, [tipomascotaid, nombremascota, razaid ,fechanacimiento, idMascota], (error, result) => {
+        if (error) {
+            res.status(500).json({ error });
+        } else if (result.affectedRows === 0) {
+            res.status(404).json({ message: "No se encontraron mascotas asociadas a este usuario con la información especificada." });
+        } else {
+            res.status(200).json({ message: "Registro actualizado exitosamente", tipomascotaid, nombremascota, razaid ,fechanacimiento});
+        }
+    });
+});
+
 // Puerto de Conexión del servidor
 const PORT = 3000;
 app.listen(PORT, () =>{

@@ -289,6 +289,7 @@ table th {
 
 table td {
     color: black;
+    font-weight: normal;
 }
 
 table th, td {
@@ -299,11 +300,29 @@ table th, td {
     border: 1px solid lightgray; /* Bordes en cada celda */
 }
 
-.save-icon, .edit-icon {
-    width: 30px; /* Tamaño más pequeño para los íconos en la tabla */
-    height: 30px;
-    vertical-align: middle; /* Alinea verticalmente con el texto */
-    margin: 0 5px; /* Espacio alrededor de los íconos */
+.actions button {
+    background-color: lightgray; /* Color de fondo del botón */
+    border: none;
+    border-radius: 5px;
+    padding: 5px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 35px; /* Ancho fijo del botón */
+    height: 35px; /* Alto fijo del botón */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
+/* Cambio de color al pasar el mouse */
+.actions button:hover {
+    background-color: #2e7d32;
+}
+
+/* Estilo para los iconos dentro de los botones */
+.actions button img {
+    width: 20px; /* Ancho del icono */
+    height: 20px; /* Alto del icono */
+    object-fit: contain; /* Asegura que el icono mantenga sus proporciones */
+}
 
