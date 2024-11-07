@@ -1,4 +1,4 @@
-// init2.js
+// funcionesconsultarmasc.js
 import { cargarTiposMascota } from './cargartiposmascota.js';
 
 document.addEventListener('DOMContentLoaded', () => {
