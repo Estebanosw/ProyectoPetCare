@@ -233,7 +233,6 @@ app.put('/api/actualizarmascota/:idMascota', (req, res) => {
     });
 });
 
-
 // consulta de mascota
 app.get('/api/obtenernombremascota/:UsuarioDocumento/:tipomascotaid', (req, res) => {
     const { UsuarioDocumento } = req.params;
@@ -323,6 +322,32 @@ app.get('/api/consultarvacuna/:UsuarioDocumento/:tipoMascota/:nombreMascota', (r
             message: "Datos de la tabla",
             data: result
         });
+    });
+});
+
+// Ruta POST para guardar el registro de medicamento
+app.post('/api/guardarmedicamento', (req, res) => {
+    const { mascotaid, nombre, dosis, frecuencia, duracion, estado } = req.body;
+
+    // Validar que los campos requeridos no estén vacíos
+    if (!mascotaid || !nombre || !dosis || !frecuencia || !duracion || !estado) {
+        return res.status(400).json({ success: false, message: 'Todos los campos son requeridos.' });
+    }
+
+    // Consulta SQL para insertar un nuevo medicamento
+    const sql = 'INSERT INTO medicamentos (mascotaid, nombre, dosis, frecuencia, duracion, estado) VALUES (?, ?, ?, ?, ?, ?)';
+    connection.query(sql, [mascotaid, nombre, dosis, frecuencia, duracion, estado], (error, result) => {
+        if (error) {
+            console.error('Error al insertar Medicamento:', error); // Registro del error en el servidor
+            return res.status(500).json({ success: false, message: 'Error al guardar el medicamento', error: error.message });
+        } else {
+            // Responder con éxito y un mensaje claro
+            res.status(201).json({ 
+                success: true, 
+                id: result.insertId, 
+                message: 'Medicamento creado correctamente' // Mensaje de éxito
+            });
+        }
     });
 });
 

@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ver mis mascotas</title>
-    <link rel="stylesheet" href="/template/Recursos/Styles/styleconsultaMasc.css">
+    <title>Crear Medicamento</title>
+    <link rel="stylesheet" href="/template/Recursos/Styles/styleRegistrarvacuna.css">
 </head>
 <body>
     <header class="header">
@@ -65,40 +65,52 @@
         </nav>
     </div>
     <section class="content">
-        <h1>VER MIS MASCOTAS</h1>
-        <form id="formConsultarMascota">
+        <h1>REGISTRAR NUEVO MEDICAMENTO</h1>
+        <form id="formCrearMedicamento">
             <div class="input-group">
                 <label for="tipoMascota">Tipo de Mascota</label>
                 <select id="tipoMascota" name="tipoMascota" required></select>
-            </div>            
+            </div>
 
             <div class="input-group">
-                <label for="nombreMascota">Nombre Mascota</label>
-                <input type="text" id="nombreMascota" name="nombreMascota" placeholder="Ingrese el nombre" required>
-            </div>  
+                <label for="Mascota">Mascota</label>
+                <select id="Mascota" name="Mascota" required></select>
+            </div>   
 
-            <button type="submit" id="consultarBtn" class="btnconsultaMasc" aria-label="ConsultarMascota">Consultar Mascota</button>
-            <p id="error-message" style="color: red;"></p>
+            <div class="input-group">
+                <label for="nombreMedicamento">Nombre Medicamento</label>
+                <input type="text" id="nombreMedicamento" name="nombreMedicamento" placeholder="Ingrese el nombre" required>
+            </div>
+
+            <div class="input-group">
+                <label for="dosis">Dosis</label>
+                <input type="text" id="dosis" name="dosis" placeholder="Ingrese la dosis" required>
+            </div>
+
+            <div class="input-group">
+                <label for="frecuencia">Frecuencia</label>
+                <input type="text" id="frecuencia" name="frecuencia" placeholder="Ingrese la frecuencia" required>
+            </div>
+
+            <div class="input-group">
+                <label for="duracionTrat">Duración Tratamiento</label>
+                <input type="text" id="duracionTrat" name="duracionTrat" placeholder="Ingrese la duración del tratamiento" required>
+            </div>
+
+            <div class="input-group">
+                <label for="estado">Estado <br>(Marque si esta activo)</label>
+                <input type="checkbox" id="activo" name="activo">
+            </div>
+
+            <button type="submit" class="btncrearMed" aria-label="crearmed">Registrar Medicamento</button>
         </form>
-            <table id="tablaConsMascota">
-                <thead>
-                    <tr>
-                        <th>Tipo de mascota</th>
-                        <th>Nombre Mascota</th>
-                        <th>Raza</th>
-                        <th>Fecha de Nacimiento</th>
-                    </tr>
-                </thead>
-                <tbody></tbody>
-            </table>
+        <p id="error-message" style="color: red; display: none;"></p>
     </section>
-
     <footer>
         <p>2024 PetCare. Todos los derechos reservados</p>
     </footer>
     <script src="/template/js/menus.js"></script>
     <script src="/template/js/session.js"></script>
-    <script type="module" src="/template/js/funcionesconsultmasc.js"></script>
-    <script src="/template/js/consultamasc.js"></script>
+    <script type="module" src="/template/js/funcionesmascxtipomasc.js"></script>
 </body>
 </html>
