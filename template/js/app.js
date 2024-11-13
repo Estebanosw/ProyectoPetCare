@@ -330,7 +330,7 @@ app.post('/api/guardarmedicamento', (req, res) => {
     const { mascotaid, nombre, dosis, frecuencia, duracion, estado } = req.body;
 
     // Validar que los campos requeridos no estén vacíos
-    if (!mascotaid || !nombre || !dosis || !frecuencia || !duracion || !estado) {
+    if (!mascotaid || !nombre || !dosis || !frecuencia || !duracion) {
         return res.status(400).json({ success: false, message: 'Todos los campos son requeridos.' });
     }
 
@@ -348,6 +348,49 @@ app.post('/api/guardarmedicamento', (req, res) => {
                 message: 'Medicamento creado correctamente' // Mensaje de éxito
             });
         }
+    });
+});
+
+// consulta de medicamentos
+app.get('/api/consultarmedicamentos/:UsuarioDocumento/:tipoMascota/:nombreMascota', (req, res) => {
+    const query = `
+        select me.nombre,me.dosis,me.frecuencia,me.duracion, me.estado from medicamentos as me
+        inner join mascota as ma
+        on me.mascotaid=ma.id
+        inner join tipomascota as tp
+        ON ma.tipomascotaid = tp.id
+        where ma.UsuarioDocumento = ?
+        and tp.id = ?
+        and ma.nombre like ?;
+    `;
+
+    const usuarioDocumento = req.params.UsuarioDocumento;
+    const tipoMascota = req.params.tipoMascota;
+    const nombreMascota = `%${req.params.nombreMascota}%`;
+
+    connection.query(query, [usuarioDocumento, tipoMascota, nombreMascota], (error, result) => {
+        if (error) {
+            return res.status(500).json({
+                success: false,
+                message: "Error de recuperación de datos",
+                details: error.message
+            });
+        }
+
+        if (result.length === 0) {
+            // Si no hay resultados, retornar un status 404
+            return res.status(404).json({
+                success: false,
+                message: "No se encontraron medicamentos asociados a esta mascota con el nombre y tipo especificados."
+            });
+        }
+
+        // Si hay resultados, retornar un status 200 con los datos
+        res.status(200).json({
+            success: true,
+            message: "Datos de la tabla",
+            data: result
+        });
     });
 });
 
