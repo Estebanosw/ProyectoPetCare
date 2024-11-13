@@ -1,4 +1,4 @@
-// init.js
+// funcionescrearmasc.js
 import { cargarTiposMascota } from './cargartiposmascota.js';
 import { cargarRazas } from './cargarrazas.js';
 import { crearMascota } from './crearmascota.js';

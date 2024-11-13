@@ -43,7 +43,7 @@ document.getElementById('formEditarMascota').addEventListener('submit', async (e
                     </td>
                     <td>
                         <select disabled id="tipo-${mascota.id}">
-                            <option value="${mascota.tipoMascotaId}" selected>${mascota.descripciontipom}</option>
+                            <option value="${mascota.nombre}" selected>${mascota.descripciontipom}</option>
                         </select>
                     </td>
                     <td><input type="text" id="nombre-${mascota.id}" value="${mascota.nombre}" disabled /></td>
