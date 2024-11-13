@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crear Mascota</title>
-    <link rel="stylesheet" href="/template/Recursos/Styles/styleEditarMasc.css">
+    <title>Ver mis mascotas</title>
+    <link rel="stylesheet" href="/template/Recursos/Styles/Styledesparacitaciones.css">
 </head>
 <body>
     <header class="header">
@@ -55,7 +55,7 @@
                                 <img src="/template/Recursos/images/Medicamentos.png" alt="Medicamentos" class="menu-icon">
                                 MEDICAMENTOS
                             </a></li>
-                        <li><a href="/template/desparasitaciones.html">
+                        <li><a href="#">
                                 <img src="/template/Recursos/images/Desparacitar.png" alt="Desparasitaciones" class="menu-icon">
                                 DESPARASITACIONES
                             </a></li>
@@ -65,8 +65,8 @@
         </nav>
     </div>
     <section class="content">
-        <h1>EDITAR MASCOTA</h1>
-        <form id="formEditarMascota">
+        <h1>DESPARASITACIONES</h1>
+        <form id="formdesparacitaciones">
             <div class="input-group">
                 <label for="tipoMascota">Tipo de Mascota</label>
                 <select id="tipoMascota" name="tipoMascota" required></select>
@@ -74,31 +74,31 @@
 
             <div class="input-group">
                 <label for="nombreMascota">Nombre Mascota</label>
-                <input type="text" id="nombreMascota" name="nombreMascota" required>
+                <input type="text" id="nombreMascota" name="nombreMascota" placeholder="Ingrese el nombre" required>
             </div>  
-
-            <button type="submit" class="btneditarMascota" aria-label="EditarMascota">Consultar Mascota</button>
+            <div class="buttons">
+                <a href="/template/registrardesparacitacion.html" class="btnregistrovacuna" aria-label="Registrarse en PetCare">Registrar Nueva  Desparasitación</a>
+                <button type="submit" id="consultarBtn" class="btnvacuna" aria-label="Consulvacuna">Consultar Desparasitación</button>
+            </div>
             <p id="error-message" style="color: red;"></p>
         </form>
-        <table id="tablaConsMascota">
-            <thead>
-              <tr>
-                <th>Acciones</th>
-                <th>Tipo de Mascota</th>
-                <th>Nombre Mascota</th>
-                <th>Raza</th>
-                <th>Fecha de Nacimiento</th>
-              </tr>
-            </thead>
-            <tbody></tbody>
-          </table>          
+            <table id="tablavacuna">
+                <thead>
+                    <tr>
+                        <th>Nombre Desparasitante</th>
+                        <th>Fecha Aplicación</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
     </section>
+
     <footer>
         <p>2024 PetCare. Todos los derechos reservados</p>
     </footer>
     <script src="/template/js/menus.js"></script>
     <script src="/template/js/session.js"></script>
     <script type="module" src="/template/js/funcionesconsultmasc.js"></script>
-    <script type="module" src="/template/js/editarmascota.js"></script>
+    <script src="/template/js/consultarvacuna.js"></script>
 </body>
 </html>

@@ -276,7 +276,7 @@ app.post('/api/guardarvacuna', (req, res) => {
             res.status(201).json({ 
                 success: true, 
                 id: result.insertId, 
-                message: 'Vacuna creada correctamente' // Mensaje de éxito
+                message: 'Vacuna Registrada correctamente' // Mensaje de éxito
             });
         }
     });
@@ -351,6 +351,7 @@ app.post('/api/guardarmedicamento', (req, res) => {
     });
 });
 
+
 // consulta de medicamentos
 app.get('/api/consultarmedicamentos/:UsuarioDocumento/:tipoMascota/:nombreMascota', (req, res) => {
     const query = `
@@ -391,6 +392,33 @@ app.get('/api/consultarmedicamentos/:UsuarioDocumento/:tipoMascota/:nombreMascot
             message: "Datos de la tabla",
             data: result
         });
+    });
+});
+
+// Ruta POST para guardar el registro de desparasitacion
+app.post('/api/guardardesparacitacion', (req, res) => {
+    const { nombre, fechaaplicacion, mascotaid } = req.body;
+
+    // Validar que los campos requeridos no estén vacíos
+    if ( !nombre || !fechaaplicacion || !mascotaid) {
+        return res.status(400).json({ success: false, message: 'Todos los campos son requeridos.' });
+    }
+
+    // Consulta SQL para insertar una nueva mascota
+    const sql = 'INSERT INTO `PetCare`.`desparasitaciones` (`nombre`,`fechaaplicacion`,`mascotaid`) VALUES (?, ?, ?)';
+    connection.query(sql, [nombre, fechaaplicacion, mascotaid], (error, result) => {
+        if (error) {
+            console.error('Error al insertar Vacuna:', error); // Registro del error en el servidor
+            return res.status(500).json({ success: false, message: 'Error al guardar la Vacuna', error: error.message });
+        } else {
+            // Responder con éxito y un mensaje claro
+            res.status(201).json({ 
+                success: true, 
+                id: result.insertId, 
+                message: 'Desparacitación registrada correctamente' // Mensaje de éxito
+            });
+        }
+
     });
 });
 
