@@ -422,6 +422,50 @@ app.post('/api/guardardesparacitacion', (req, res) => {
     });
 });
 
+// consulta de desparacitaciones
+app.get('/api/consultardesparacitaciones/:UsuarioDocumento/:tipoMascota/:nombreMascota', (req, res) => {
+    const query = `
+        select d.nombre, d.fechaaplicacion
+        from desparasitaciones as d
+        inner join mascota as m
+        on d.mascotaid=m.id
+        inner join tipomascota as tp
+        ON m.tipomascotaid = tp.id 
+        where m.UsuarioDocumento = ? 
+        and tp.id = ?
+        and m.nombre like ?;
+    `;
+
+    const usuarioDocumento = req.params.UsuarioDocumento;
+    const tipoMascota = req.params.tipoMascota;
+    const nombreMascota = `%${req.params.nombreMascota}%`;
+
+    connection.query(query, [usuarioDocumento, tipoMascota, nombreMascota], (error, result) => {
+        if (error) {
+            return res.status(500).json({
+                success: false,
+                message: "Error de recuperación de datos",
+                details: error.message
+            });
+        }
+
+        if (result.length === 0) {
+            // Si no hay resultados, retornar un status 404
+            return res.status(404).json({
+                success: false,
+                message: "No se encontraron desparacitaciones asociadas a esta mascota con el nombre y tipo especificados."
+            });
+        }
+
+        // Si hay resultados, retornar un status 200 con los datos
+        res.status(200).json({
+            success: true,
+            message: "Datos de la tabla",
+            data: result
+        });
+    });
+});
+
 // Puerto de Conexión del servidor
 const PORT = 3000;
 app.listen(PORT, () =>{
