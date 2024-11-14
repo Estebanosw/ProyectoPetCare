@@ -37,25 +37,80 @@ document.getElementById('formMedicamento').addEventListener('submit', async (eve
                             <img src="/template/Recursos/images/Guardar.png" alt="Guardar" title="Guardar"/>
                         </button>
                     </td>
-                    <td>
-                        <select disabled id="tipo-${medicamento.id}">
-                            <option value="${mascota.tipoMascotaId}" selected>${mascota.descripciontipom}</option>
-                        </select>
-                    </td>
-                    <td><input type="text" id="nombre-${mascota.id}" value="${mascota.nombre}" disabled /></td>
-                    <td>
-                        <select disabled id="raza-${mascota.id}">
-                            <option value="${mascota.razaId}" selected>${mascota.descripcionraza}</option>
-                        </select>
-                    </td>
-                    <td><input type="date" id="fecha-${mascota.id}" value="${mascota.fechanacimiento.split('T')[0]}" disabled /></td>
+                    <td><input type="text" id="nombre-${medicamento.id}" value="${medicamento.nombre}" disabled /></td>
+                    <td><input type="text" id="dosis-${medicamento.id}" value="${medicamento.dosis}" disabled /></td>
+                    <td><input type="text" id="frecuencia-${medicamento.id}" value="${medicamento.frecuencia}" disabled /></td>
+                    <td><input type="text" id="duracion-${medicamento.id}" value="${medicamento.duracion}" disabled /></td>
+                    <td><input type="checkbox" id="estado-${medicamento.id}" ${medicamento.estado === 1 ? 'checked' : ''} disabled /></td>
                 `;
                 tbody.appendChild(row);
             });
         } else {
-            console.error('Error al obtener las mascotas:', data.message);
+            console.error('Error al obtener los medicamentos:', data.message);
         }
     } catch (error) {
         console.error('Error de conexión:', error);
     }
 });
+
+//Función para habilitar la edición de los campos de un registro específico.
+async function editarmed(id) {
+    document.getElementById(`nombre-${id}`).disabled = false;
+    document.getElementById(`dosis-${id}`).disabled = false;
+    document.getElementById(`frecuencia-${id}`).disabled = false;
+    document.getElementById(`duracion-${id}`).disabled = false;
+    document.getElementById(`estado-${id}`).disabled = false;
+
+    // Mostrar botón de guardar y ocultar el de editar
+    document.querySelector(`#tablamedicamento tbody tr .edit-icon[onclick="editmasc('${id}')"]`).style.display = 'none';
+    document.querySelector(`#tablamedicamento tbody tr .save-icon[onclick="savemasc('${id}')"]`).style.display = 'inline-block';
+
+    // Cargar opciones de selección para tipo de mascota y raza
+    await cargarOpciones(id);
+}
+
+//Función para guardar los cambios realizados en el registro.
+async function savemed(id) {
+    const nombreMedicamento = document.getElementById(`nombre-${id}`).value;
+    const dosisMedicamento = document.getElementById(`dosis-${id}`).value;
+    const frecuenciaMedicamento = document.getElementById(`frecuencia-${id}`).value;
+    const duracionMedicamento = document.getElementById(`duracion-${id}`).value;
+    const estadoMedicamento = document.getElementById(`estado-${id}`).value;
+
+    try {
+        const response = await fetch(`http://localhost:3000/api/actualizarmascota/${id}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                tipomascotaid: tipoMascota,
+                nombremascota: nombreMascota,
+                razaid: razaMascota,
+                fechanacimiento: fechaNacimiento
+            })
+        });
+
+        if (response.ok) {
+            // Si la actualización es exitosa, redirigir al usuario
+            alert('Mascota actualizada con éxito');
+            window.location.href = '/template/editarmascota.html'; 
+        } else {
+            const errorData = await response.json();
+            console.error('Error al guardar:', errorData.message);
+            alert('Hubo un error al guardar la información');
+        }
+    } catch (error) {
+        console.error('Error de conexión:', error);
+    }
+
+    // Desactivar edición y actualizar botones
+    document.getElementById(`tipo-${id}`).disabled = true;
+    document.getElementById(`nombre-${id}`).disabled = true;
+    document.getElementById(`raza-${id}`).disabled = true;
+    document.getElementById(`fecha-${id}`).disabled = true;
+
+    document.querySelector(`#tablaConsMascota tbody tr .edit-icon[onclick="editmasc('${id}')"]`).style.display = 'inline-block';
+    document.querySelector(`#tablaConsMascota tbody tr .save-icon[onclick="savemasc('${id}')"]`).style.display = 'none';
+}
+
+window.editarmed = editarmed;
+window.savemasc = savemasc;
