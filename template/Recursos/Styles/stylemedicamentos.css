@@ -297,35 +297,86 @@ form {
     background-color: #2e7d32;
     transform: scale(1.05);
 }
+
+.btneditarMascota {
+    background-color: #388E3C;
+    border: 1px solid #8492A6;
+    border-radius: 60px;
+    width: 260px;
+    height: 76px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px auto;
+    color: #FFFFFF;
+    font-family: 'Glacial Indifference', sans-serif;
+    font-size: 30px;
+    line-height: 39px;
+    text-align: center;
+    transition: background-color 0.3s, transform 0.3s;
+    cursor: pointer;
+}
+
+.btneditarMascota:hover {
+    background-color: #2e7d32;
+    transform: scale(1.05);
+}
+
+/* Estilo para el contorno de la tabla */
 table {
     width: 100%;
-    max-width: 1200px;
-    margin-bottom: 50px;
+    border-collapse: collapse; /* Elimina el espacio entre las celdas */
+    border: 1px solid #ddd; /* Contorno gris claro */
+    margin-top: 20px;
 }
-table {
-    width: 100%;
-    border-collapse: collapse;
+
+td:first-child {
+    border-right: none;
 }
-th {
-    font-weight: bold;
+
+td:last-child {
+    border-left: none;
+}
+
+table th {
     color: #388E3C;
-    font-family: 'Glacial Indifference';
 }
 
-th, td {
-    padding: 10px;
-    border: 1px solid #ddd;
-    text-align: center;
-}
-
-tr:nth-child(even) {
-    background-color: #f9f9f9;
-}
-
-tr {
-    padding: 10px;
-    border: 1px solid #ddd;
-    text-align: center;
+table td {
     color: black;
-    font-family: 'Glacial Indifference';
+    font-weight: normal;
+}
+
+table th, td {
+    font-weight: bold;
+    padding: 10px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+    border: 1px solid lightgray; /* Bordes en cada celda */
+}
+
+.actions button {
+    background-color: lightgray; /* Color de fondo del botón */
+    border: none;
+    border-radius: 5px;
+    padding: 5px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 35px; /* Ancho fijo del botón */
+    height: 35px; /* Alto fijo del botón */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Cambio de color al pasar el mouse */
+.actions button:hover {
+    background-color: #2e7d32;
+}
+
+/* Estilo para los iconos dentro de los botones */
+.actions button img {
+    width: 20px; /* Ancho del icono */
+    height: 20px; /* Alto del icono */
+    object-fit: contain; /* Asegura que el icono mantenga sus proporciones */
 }

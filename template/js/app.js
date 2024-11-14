@@ -395,6 +395,39 @@ app.get('/api/consultarmedicamentos/:UsuarioDocumento/:tipoMascota/:nombreMascot
     });
 });
 
+// Ruta PUT para actualizar un medicamento en la base de datos
+app.put('/api/actualizarmedicamento/:idMedicamento', (req, res) => {
+    const { idMedicamento } = req.params;
+    const { nombreMedicamento, dosisMedicamento, frecuenciaMedicamento , duracionMedicamento, estadoMedicamento } = req.body;
+
+    // Validación para asegurarse de que al menos un campo se está pasando en el cuerpo de la solicitud
+    if (!nombreMedicamento && !dosisMedicamento && !frecuenciaMedicamento && !duracionMedicamento && !estadoMedicamento) {
+        return res.status(400).json({ error: "Se debe proporcionar al menos un campo para actualizar el medicamento." });
+    }
+
+    const query = `
+        UPDATE medicamentos
+        SET
+            nombre = COALESCE(?, nombre),
+            dosis = COALESCE(?, dosis),
+            frecuencia = COALESCE(?, frecuencia),
+            duracion = COALESCE(?, duracion),
+            estado = COALESCE(?, estado)
+        WHERE id = ?
+        `;
+
+    connection.query(query, [nombreMedicamento, dosisMedicamento, frecuenciaMedicamento ,duracionMedicamento, estadoMedicamento, idMedicamento], (error, result) => {
+        if (error) {
+            res.status(500).json({ error });
+        } else if (result.affectedRows === 0) {
+            res.status(404).json({ message: "No se encontraron medicamentos asociados a este usuario con la información especificada." });
+        } else {
+            res.status(200).json({ message: "Registro actualizado exitosamente", nombreMedicamento, dosisMedicamento, frecuenciaMedicamento ,duracionMedicamento, estadoMedicamento});
+        }
+
+    });
+});
+
 // Ruta POST para guardar el registro de desparasitacion
 app.post('/api/guardardesparacitacion', (req, res) => {
     const { nombre, fechaaplicacion, mascotaid } = req.body;
